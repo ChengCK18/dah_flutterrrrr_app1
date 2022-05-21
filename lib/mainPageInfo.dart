@@ -12,39 +12,64 @@ class _MainPageInfoState extends State<MainPageInfo> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Expanded(
             flex: 5,
             child: Container(
-                child: Center(child: LayoutBuilder(builder: (ctx, constraints) {
-                  return Stack(children: <Widget>[
+                child: LayoutBuilder(builder: (ctx, constraints) {
+                  return Row(children: [
+                    Stack(children: <Widget>[
+                      Container(
+                          height: constraints.maxHeight * 0.8,
+                          width: constraints.maxWidth * 0.4,
+                          decoration: BoxDecoration(
+                              color: Colors.blue,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(50)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 3,
+                                  offset: const Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ])),
+                      Container(
+                          height: constraints.maxHeight * 0.2,
+                          width: constraints.maxWidth * 0.4,
+                          decoration: const BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(50),
+                                topRight: Radius.circular(50)),
+                          )),
+                    ]),
+                    LayoutBuilder(builder: (ctx, constraints) {
+                      return Column(children: [
+                        Container(
+                          child: Text("100%"),
+                          padding:
+                              EdgeInsets.only(top: constraints.maxHeight * 0.1),
+                        ),
+                        Container(
+                          child: Text("0%"), //Need to subtract val pad value
+                          padding:
+                              EdgeInsets.only(top: constraints.maxHeight * 0.7),
+                        )
+                      ]);
+                    }),
                     Container(
-                        height: constraints.maxHeight * 0.8,
-                        width: constraints.maxWidth * 0.4,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(50)),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 3,
-                                blurRadius: 3,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
-                              ),
-                            ])),
-                    Container(
-                        height: constraints.maxHeight * 0.7,
-                        width: constraints.maxWidth * 0.4,
-                        decoration: const BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50)),
-                        ))
+                        child: Text(
+                      "Value",
+                      style: TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black),
+                    ))
                   ]);
-                })),
+                }),
                 margin: const EdgeInsets.only(
                     left: 5.0, right: 2.5, top: 5.0, bottom: 0),
                 decoration: BoxDecoration(
