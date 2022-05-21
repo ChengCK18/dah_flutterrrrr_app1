@@ -33,10 +33,45 @@ class MainPage extends StatelessWidget {
             Expanded(
                 flex: 5,
                 child: Row(
-                  children: const <Widget>[
+                  children: <Widget>[
                     Expanded(
-                        flex: 5, child: Center(child: Text("Diagram Here"))),
-                    Expanded(flex: 5, child: Text("Information Here"))
+                        flex: 5,
+                        child: Container(
+                            child: Center(child: Text("Diagram Here")),
+                            margin: const EdgeInsets.only(
+                                left: 5.0, right: 2.5, top: 5.0, bottom: 0),
+                            decoration: BoxDecoration(
+                                color: Colors.lightBlue,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 3,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ]))),
+                    Expanded(
+                        flex: 5,
+                        child: Container(
+                            child: Center(child: Text("Information Here")),
+                            margin: const EdgeInsets.only(
+                                left: 2.5, right: 5.0, top: 5.0, bottom: 0),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 3,
+                                    blurRadius: 3,
+                                    offset: const Offset(
+                                        0, 3), // changes position of shadow
+                                  ),
+                                ])))
                   ],
                 )),
             Expanded(
@@ -46,7 +81,20 @@ class MainPage extends StatelessWidget {
                   Expanded(
                       flex: 5, child: Center(child: Text("Buttonssssss Here")))
                 ]),
-                color: Colors.lightBlue,
+                margin: const EdgeInsets.only(
+                    left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 3,
+                        blurRadius: 3,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ]),
               ),
             ),
           ],
