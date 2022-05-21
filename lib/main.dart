@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:ze_flutter_app_1/mainPageButtons.dart';
+import 'mainPageButtons.dart';
+import 'mainPageInfo.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,73 +33,8 @@ class MainPage extends StatelessWidget {
         appBar: AppBar(centerTitle: true, title: const Text("Dahhhh title")),
         body: Column(
           children: <Widget>[
-            Expanded(
-                flex: 5,
-                child: Row(
-                  children: <Widget>[
-                    Expanded(
-                        flex: 5,
-                        child: Container(
-                            child: Center(child: Text("Diagram Here")),
-                            margin: const EdgeInsets.only(
-                                left: 5.0, right: 2.5, top: 5.0, bottom: 0),
-                            decoration: BoxDecoration(
-                                color: Colors.lightBlue,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 3,
-                                    blurRadius: 3,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ]))),
-                    Expanded(
-                        flex: 5,
-                        child: Container(
-                            child: Center(child: Text("Information Here")),
-                            margin: const EdgeInsets.only(
-                                left: 2.5, right: 5.0, top: 5.0, bottom: 0),
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(20)),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 3,
-                                    blurRadius: 3,
-                                    offset: const Offset(
-                                        0, 3), // changes position of shadow
-                                  ),
-                                ])))
-                  ],
-                )),
-            Expanded(
-              flex: 5,
-              child: Container(
-                child: Row(children: const <Widget>[
-                  Expanded(
-                      flex: 5, child: Center(child: Text("Buttonssssss Here")))
-                ]),
-                margin: const EdgeInsets.only(
-                    left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        spreadRadius: 3,
-                        blurRadius: 3,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ]),
-              ),
-            ),
+            Expanded(flex: 5, child: MainPageInfo()),
+            Expanded(flex: 5, child: MainPageButtons()),
           ],
         ));
   }
