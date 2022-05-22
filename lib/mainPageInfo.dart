@@ -72,6 +72,7 @@ class _MainPageInfoState extends State<MainPageInfo> {
                 }),
                 margin: const EdgeInsets.only(
                     left: 5.0, right: 2.5, top: 5.0, bottom: 0),
+                padding: const EdgeInsets.only(left: 10),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -87,7 +88,94 @@ class _MainPageInfoState extends State<MainPageInfo> {
         Expanded(
             flex: 5,
             child: Container(
-                child: const Center(child: Text("Information Here")),
+                child: Center(
+                    child: Column(children: [
+                  Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: const Text(
+                        "July 2022 Summary",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black),
+                      )),
+                  Flexible(
+                      child: Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 25, top: 5, bottom: 5),
+                          child: const Text(
+                            "Income\n850.66",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.green.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 3,
+                                  // changes position of shadow
+                                ),
+                              ]))),
+                  Flexible(
+                      child: Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 5, bottom: 5),
+                          child: const Text(
+                            "Spending\n50",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.red.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 3,
+                                  // changes position of shadow
+                                ),
+                              ]))),
+                  Flexible(
+                      child: Container(
+                          margin: const EdgeInsets.only(top: 10),
+                          padding: const EdgeInsets.only(
+                              left: 20, right: 20, top: 5, bottom: 5),
+                          child: const Text(
+                            "Balance\n800.66",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black),
+                          ),
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius:
+                                  const BorderRadius.all(Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.blue.withOpacity(0.5),
+                                  spreadRadius: 3,
+                                  blurRadius: 3,
+                                  // changes position of shadow
+                                ),
+                              ])))
+                ])),
                 margin: const EdgeInsets.only(
                     left: 2.5, right: 5.0, top: 5.0, bottom: 0),
                 decoration: BoxDecoration(
