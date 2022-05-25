@@ -61,7 +61,7 @@ class _MainPageInfoState extends State<MainPageInfo> {
                       ]);
                     }),
                     Container(
-                        child: Text(
+                        child: const Text(
                       "Value",
                       style: TextStyle(
                           fontSize: 18.0,
