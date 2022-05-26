@@ -11,10 +11,10 @@ class _MainPageButtonsState extends State<MainPageButtons> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(children: <Widget>[
-        Expanded(
-            flex: 5,
-            child: Center(
+      child: SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(children: <Widget>[
+            Container(
                 child: ElevatedButton.icon(
               icon: Icon(
                 Icons.home,
@@ -30,31 +30,59 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                   borderRadius: new BorderRadius.circular(20.0),
                 ),
               ),
-            ))),
-        Expanded(
-            flex: 5,
-            child: Center(
-                child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Elevated Button', textAlign: TextAlign.center),
-              style: ElevatedButton.styleFrom(
-                shape: CircleBorder(),
-                padding: EdgeInsets.all(32),
+            )),
+            Container(
+                child: ElevatedButton.icon(
+              icon: Icon(
+                Icons.home,
+                color: Colors.green,
+                size: 30.0,
               ),
-            ))),
-        Expanded(
-            flex: 5,
-            child: Center(
-                child: ElevatedButton(
-              onPressed: () {},
-              child: Text('Elevated Button', textAlign: TextAlign.center),
+              label: Text('Elevated Button'),
+              onPressed: () {
+                print('Button Pressed');
+              },
               style: ElevatedButton.styleFrom(
-                shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
-                padding: EdgeInsets.all(32),
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(20.0),
+                ),
               ),
-            )))
-      ]),
+            )),
+            Container(
+                child: ElevatedButton.icon(
+              icon: Icon(
+                Icons.home,
+                color: Colors.green,
+                size: 30.0,
+              ),
+              label: Text('Elevated Button'),
+              onPressed: () {
+                print('Button Pressed');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(20.0),
+                ),
+              ),
+            )),
+            Container(
+                child: ElevatedButton.icon(
+              icon: Icon(
+                Icons.home,
+                color: Colors.green,
+                size: 30.0,
+              ),
+              label: Text('Elevated Button'),
+              onPressed: () {
+                print('Button Pressed');
+              },
+              style: ElevatedButton.styleFrom(
+                shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(20.0),
+                ),
+              ),
+            ))
+          ])),
       margin:
           const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
       decoration: BoxDecoration(
