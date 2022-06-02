@@ -10,6 +10,7 @@ class MainPageButtons extends StatefulWidget {
 
 class _MainPageButtonsState extends State<MainPageButtons> {
   final controller = TextEditingController();
+  final double total_spend = 43.11;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,16 +19,33 @@ class _MainPageButtonsState extends State<MainPageButtons> {
           child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Stack(children: <Widget>[
+                Container(
+                    //color: Colors.red,
+                    constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width - 100,
+                        minHeight: MediaQuery.of(context).size.height),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Total Spending ➤ " + total_spend.toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
+                    )),
                 Row(children: <Widget>[
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          width: 80,
-                          height: 80,
+                          width: 50,
+                          height: 50,
                           child: const Icon(
-                            Icons.account_balance,
+                            Icons.restaurant,
                             size: 20,
                           ),
                           decoration: BoxDecoration(
@@ -61,10 +79,10 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          width: 80,
-                          height: 80,
+                          width: 50,
+                          height: 50,
                           child: const Icon(
-                            Icons.account_balance,
+                            Icons.home,
                             size: 20,
                           ),
                           decoration: BoxDecoration(
@@ -107,10 +125,10 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Container(
-                          width: 80,
-                          height: 80,
+                          width: 50,
+                          height: 50,
                           child: const Icon(
-                            Icons.account_balance,
+                            Icons.more_horiz,
                             size: 20,
                           ),
                           decoration: BoxDecoration(
@@ -122,7 +140,6 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
-                                  readOnly: true,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -132,18 +149,11 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                                   ],
                                   decoration: new InputDecoration(
                                       border: OutlineInputBorder(),
-                                      labelText: "Total Spending",
-                                      hintText: "55.32"),
+                                      labelText: "Amount",
+                                      hintText: "..."),
                                 )))
                       ]),
                 ]),
-                Container(
-                    constraints: BoxConstraints(
-                        minWidth: MediaQuery.of(context).size.width - 100),
-                    child: Text(
-                      "Koko desu",
-                      textAlign: TextAlign.left,
-                    ))
               ]))),
       margin:
           const EdgeInsets.only(left: 5.0, right: 5.0, top: 5.0, bottom: 5.0),
