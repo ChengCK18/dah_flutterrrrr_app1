@@ -2,17 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MainPageButtons extends StatefulWidget {
-  const MainPageButtons({Key? key}) : super(key: key);
+  const MainPageButtons(
+      {Key? key, required this.totalSpend, required this.set_totalSpend})
+      : super(key: key);
+  final double totalSpend;
+  final Function set_totalSpend;
 
   @override
   State<MainPageButtons> createState() => _MainPageButtonsState();
 }
 
 class _MainPageButtonsState extends State<MainPageButtons> {
-  final controller = TextEditingController();
-  final double total_spend = 43.11;
+  final spend1_controller = TextEditingController();
+  final spend2_controller = TextEditingController();
+  final spend3_controller = TextEditingController();
+
+  @override
+  void dispose() {
+    spend1_controller.dispose();
+    spend2_controller.dispose();
+    spend3_controller.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print("Rendering...");
     return Container(
       constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
       child: Center(
@@ -30,7 +46,7 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          "Total Spending ➤ " + total_spend.toString(),
+                          "Total Spending ➤ " + widget.totalSpend.toString(),
                           textAlign: TextAlign.center,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         )
@@ -57,6 +73,7 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
+                                  controller: spend1_controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -94,6 +111,7 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
+                                  controller: spend2_controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -109,6 +127,28 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                         Container(
                           child: ElevatedButton.icon(
                             onPressed: () {
+                              setState(() {
+                                if (spend1_controller.text == "") {
+                                  spend1_controller.text = "0";
+                                }
+                                if (spend2_controller.text == "") {
+                                  spend2_controller.text = "0";
+                                }
+                                if (spend3_controller.text == "") {
+                                  spend3_controller.text = "0";
+                                }
+
+                                double new_spend_amount =
+                                    double.parse(spend1_controller.text) +
+                                        double.parse(spend2_controller.text) +
+                                        double.parse(spend3_controller.text);
+
+                                widget.set_totalSpend(new_spend_amount);
+                              });
+
+                              spend1_controller.clear();
+                              spend2_controller.clear();
+                              spend3_controller.clear();
                               // Respond to button press
                             },
                             icon: Icon(Icons.add, size: 18),
@@ -119,7 +159,9 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                   SizedBox(
                     height: 10,
                     width: 5,
-                  ), //To add spacing between two column
+                  ),
+                  Text(widget.totalSpend
+                      .toString()), //To add spacing between two column
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -140,6 +182,7 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
+                                  controller: spend3_controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,

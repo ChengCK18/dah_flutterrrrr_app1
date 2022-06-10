@@ -23,9 +23,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainPage extends StatelessWidget {
+class MainPage extends StatefulWidget {
   const MainPage({Key? key, required this.title}) : super(key: key);
   final String title;
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  double totalSpend = 0;
+
+  refresh(value) {
+    setState(() {
+      print("Main side");
+      print(totalSpend);
+      print(value);
+      totalSpend = totalSpend + value;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +49,11 @@ class MainPage extends StatelessWidget {
         appBar: AppBar(centerTitle: true, title: const Text("Dahhhh title")),
         body: Column(
           children: <Widget>[
-            Expanded(flex: 5, child: MainPageInfo()),
-            Expanded(flex: 5, child: MainPageButtons()),
+            Expanded(flex: 5, child: MainPageInfo(totalSpend: totalSpend)),
+            Expanded(
+                flex: 5,
+                child: MainPageButtons(
+                    totalSpend: totalSpend, set_totalSpend: refresh)),
           ],
         ));
   }

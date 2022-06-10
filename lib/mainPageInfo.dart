@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class MainPageInfo extends StatefulWidget {
-  const MainPageInfo({Key? key}) : super(key: key);
-
+  const MainPageInfo({Key? key, required this.totalSpend}) : super(key: key);
+  final double totalSpend;
   @override
   State<MainPageInfo> createState() => _MainPageInfoState();
 }
@@ -130,8 +130,8 @@ class _MainPageInfoState extends State<MainPageInfo> {
                           margin: const EdgeInsets.only(top: 10),
                           padding: const EdgeInsets.only(
                               left: 16, right: 16, top: 5, bottom: 5),
-                          child: const Text(
-                            "Spending\n50",
+                          child: Text(
+                            'Spending\n ${widget.totalSpend}',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 16.0,
