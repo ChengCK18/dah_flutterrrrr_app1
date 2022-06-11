@@ -14,18 +14,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Demo - Budget App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MainPage(title: 'dah_flutterrrrr_app1 Demo Home Page'),
+      home: const MainPage(),
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const MainPage({Key? key}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -33,12 +32,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   double totalSpend = 0;
+  double totalIncome = 0;
 
-  refresh(value) {
+  refreshIncome(value) {
     setState(() {
-      print("Main side");
-      print(totalSpend);
-      print(value);
+      totalIncome = totalIncome + value;
+    });
+  }
+
+  refreshSpend(value) {
+    setState(() {
       totalSpend = totalSpend + value;
     });
   }
@@ -46,14 +49,20 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(centerTitle: true, title: const Text("Dahhhh title")),
+        appBar: AppBar(centerTitle: true, title: const Text("Budget")),
         body: Column(
           children: <Widget>[
-            Expanded(flex: 5, child: MainPageInfo(totalSpend: totalSpend)),
+            Expanded(
+                flex: 5,
+                child: MainPageInfo(
+                    totalSpend: totalSpend,
+                    totalIncome: totalIncome <= 0 ? 1 : totalIncome)),
             Expanded(
                 flex: 5,
                 child: MainPageButtons(
-                    totalSpend: totalSpend, set_totalSpend: refresh)),
+                    totalSpend: totalSpend,
+                    setTotalSpend: refreshSpend,
+                    setTotalIncome: refreshIncome)),
           ],
         ));
   }

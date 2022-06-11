@@ -3,32 +3,35 @@ import 'package:flutter/services.dart';
 
 class MainPageButtons extends StatefulWidget {
   const MainPageButtons(
-      {Key? key, required this.totalSpend, required this.set_totalSpend})
+      {Key? key,
+      required this.totalSpend,
+      required this.setTotalSpend,
+      required this.setTotalIncome})
       : super(key: key);
   final double totalSpend;
-  final Function set_totalSpend;
+  final Function setTotalSpend;
+  final Function setTotalIncome;
 
   @override
   State<MainPageButtons> createState() => _MainPageButtonsState();
 }
 
 class _MainPageButtonsState extends State<MainPageButtons> {
-  final spend1_controller = TextEditingController();
-  final spend2_controller = TextEditingController();
-  final spend3_controller = TextEditingController();
+  final spend1Controller = TextEditingController();
+  final spend2Controller = TextEditingController();
+  final spend3Controller = TextEditingController();
 
   @override
   void dispose() {
-    spend1_controller.dispose();
-    spend2_controller.dispose();
-    spend3_controller.dispose();
+    spend1Controller.dispose();
+    spend2Controller.dispose();
+    spend3Controller.dispose();
 
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    print("Rendering...");
     return Container(
       constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
       child: Center(
@@ -48,7 +51,27 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                         Text(
                           "Total Spending ➤ " + widget.totalSpend.toString(),
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )
+                      ],
+                    )),
+                Container(
+                    //color: Colors.red,
+                    constraints: BoxConstraints(
+                        minWidth: MediaQuery.of(context).size.width - 100,
+                        minHeight: MediaQuery.of(context).size.height),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Income/Spendings",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                          ),
                         )
                       ],
                     )),
@@ -64,16 +87,16 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             Icons.restaurant,
                             size: 20,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
                         ),
                         Container(
-                            margin: EdgeInsets.only(top: 5),
-                            constraints: BoxConstraints(maxWidth: 100),
+                            margin: const EdgeInsets.only(top: 5),
+                            constraints: const BoxConstraints(maxWidth: 100),
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
-                                  controller: spend1_controller,
+                                  controller: spend1Controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -81,13 +104,28 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: new InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       labelText: "Amount",
                                       hintText: "..."),
-                                )))
+                                ))),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              if (spend1Controller.text == "") {
+                                spend1Controller.text = "0";
+                              }
+                              widget.setTotalSpend(
+                                  double.parse(spend1Controller.text));
+                            });
+
+                            spend1Controller.clear();
+                          },
+                          icon: const Icon(Icons.remove, size: 18),
+                          label: const Text("Spend"),
+                        )
                       ]),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                     width: 5,
                   ), //To add spacing between two column
@@ -102,16 +140,16 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                             Icons.home,
                             size: 20,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
                         ),
                         Container(
-                            margin: EdgeInsets.only(top: 5),
-                            constraints: BoxConstraints(maxWidth: 100),
+                            margin: const EdgeInsets.only(top: 5),
+                            constraints: const BoxConstraints(maxWidth: 100),
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
-                                  controller: spend2_controller,
+                                  controller: spend2Controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -119,49 +157,32 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: new InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       labelText: "Amount",
                                       hintText: "..."),
                                 ))),
-                        Container(
-                          child: ElevatedButton.icon(
-                            onPressed: () {
-                              setState(() {
-                                if (spend1_controller.text == "") {
-                                  spend1_controller.text = "0";
-                                }
-                                if (spend2_controller.text == "") {
-                                  spend2_controller.text = "0";
-                                }
-                                if (spend3_controller.text == "") {
-                                  spend3_controller.text = "0";
-                                }
-
-                                double new_spend_amount =
-                                    double.parse(spend1_controller.text) +
-                                        double.parse(spend2_controller.text) +
-                                        double.parse(spend3_controller.text);
-
-                                widget.set_totalSpend(new_spend_amount);
-                              });
-
-                              spend1_controller.clear();
-                              spend2_controller.clear();
-                              spend3_controller.clear();
-                              // Respond to button press
-                            },
-                            icon: Icon(Icons.add, size: 18),
-                            label: Text("Add"),
-                          ),
-                        )
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              if (spend2Controller.text == "") {
+                                spend2Controller.text = "0";
+                              }
+                              widget.setTotalSpend(
+                                  double.parse(spend2Controller.text));
+                            });
+                            spend2Controller.clear();
+                            // Respond to button press
+                          },
+                          icon: const Icon(Icons.remove, size: 18),
+                          label: const Text("Spend"),
+                        ),
                       ]),
-                  SizedBox(
+
+                  const SizedBox(
                     height: 10,
                     width: 5,
-                  ),
-                  Text(widget.totalSpend
-                      .toString()), //To add spacing between two column
+                  ), //To add spacing between two column
                   Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,19 +191,19 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                           width: 50,
                           height: 50,
                           child: const Icon(
-                            Icons.more_horiz,
+                            Icons.wallet_membership_sharp,
                             size: 20,
                           ),
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                               shape: BoxShape.circle, color: Color(0xFFe0f2f1)),
                         ),
                         Container(
-                            margin: EdgeInsets.only(top: 5),
-                            constraints: BoxConstraints(maxWidth: 100),
+                            margin: const EdgeInsets.only(top: 5),
+                            constraints: const BoxConstraints(maxWidth: 100),
                             child: Directionality(
                                 textDirection: TextDirection.ltr,
                                 child: TextField(
-                                  controller: spend3_controller,
+                                  controller: spend3Controller,
                                   textAlign: TextAlign.center,
                                   autofocus: true,
                                   keyboardType: TextInputType.number,
@@ -190,11 +211,27 @@ class _MainPageButtonsState extends State<MainPageButtons> {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: new InputDecoration(
+                                  decoration: const InputDecoration(
                                       border: OutlineInputBorder(),
                                       labelText: "Amount",
                                       hintText: "..."),
-                                )))
+                                ))),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              if (spend3Controller.text == "") {
+                                spend3Controller.text = "0";
+                              }
+
+                              widget.setTotalIncome(
+                                  double.parse(spend3Controller.text));
+                            });
+
+                            spend3Controller.clear();
+                          },
+                          icon: const Icon(Icons.add, size: 18),
+                          label: const Text("Income"),
+                        )
                       ]),
                 ]),
               ]))),

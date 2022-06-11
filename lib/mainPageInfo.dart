@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class MainPageInfo extends StatefulWidget {
-  const MainPageInfo({Key? key, required this.totalSpend}) : super(key: key);
+  const MainPageInfo(
+      {Key? key, required this.totalSpend, required this.totalIncome})
+      : super(key: key);
   final double totalSpend;
+  final double totalIncome;
   @override
   State<MainPageInfo> createState() => _MainPageInfoState();
 }
@@ -37,37 +39,50 @@ class _MainPageInfoState extends State<MainPageInfo> {
                                 ),
                               ])),
                       Container(
-                          height: constraints.maxHeight * 0.2,
+                          height: (constraints.maxHeight * 0.8) *
+                              ((1 -
+                                          ((widget.totalIncome -
+                                                  widget.totalSpend) /
+                                              widget.totalIncome)) >
+                                      0.8
+                                  ? 0.8
+                                  : (1 -
+                                      ((widget.totalIncome -
+                                              widget.totalSpend) /
+                                          widget.totalIncome))),
                           width: constraints.maxWidth * 0.4,
                           decoration: const BoxDecoration(
                             color: Colors.red,
                             borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(50),
-                                topRight: Radius.circular(50)),
+                              topLeft: Radius.circular(50),
+                              topRight: Radius.circular(50),
+                              bottomRight: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
                           )),
                     ]),
                     LayoutBuilder(builder: (ctx, constraints) {
                       return Column(children: [
                         Container(
-                          child: Text("100%"),
+                          child: const Text("100%"),
                           padding:
                               EdgeInsets.only(top: constraints.maxHeight * 0.1),
                         ),
                         Container(
-                          child: Text("0%"), //Need to subtract val pad value
+                          child:
+                              const Text("0%"), //Need to subtract val pad value
                           padding:
                               EdgeInsets.only(top: constraints.maxHeight * 0.7),
                         )
                       ]);
                     }),
-                    Container(
-                        child: const Text(
-                      "Value",
-                      style: TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ))
+                    Text(
+                      "${widget.totalIncome - widget.totalSpend}",
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
                   ]);
                 }),
                 margin: const EdgeInsets.only(
@@ -93,7 +108,7 @@ class _MainPageInfoState extends State<MainPageInfo> {
                   Container(
                       margin: const EdgeInsets.only(top: 10),
                       child: const Text(
-                        "July 2022 Summary",
+                        "Summary",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 18.0,
@@ -105,10 +120,10 @@ class _MainPageInfoState extends State<MainPageInfo> {
                           margin: const EdgeInsets.only(top: 20),
                           padding: const EdgeInsets.only(
                               left: 25, right: 25, top: 5, bottom: 5),
-                          child: const Text(
-                            "Income\n850.66",
+                          child: Text(
+                            "Income\n${widget.totalIncome}",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
@@ -133,7 +148,7 @@ class _MainPageInfoState extends State<MainPageInfo> {
                           child: Text(
                             'Spending\n ${widget.totalSpend}',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
@@ -155,10 +170,10 @@ class _MainPageInfoState extends State<MainPageInfo> {
                           margin: const EdgeInsets.only(top: 10),
                           padding: const EdgeInsets.only(
                               left: 20, right: 20, top: 5, bottom: 5),
-                          child: const Text(
-                            "Balance\n800.66",
+                          child: Text(
+                            "Balance\n${widget.totalIncome - widget.totalSpend}",
                             textAlign: TextAlign.center,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black),
