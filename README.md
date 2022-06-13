@@ -42,7 +42,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="readme_doc/web_preview.png"/>
+<img src="readme_doc/preview.png"/>
 The main idea of this project is to construct a simple single page budget application using flutter. This is my first mobile application and this application is meant to be a learning experience for me on Flutter.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
